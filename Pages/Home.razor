@@ -1,0 +1,137 @@
+﻿@page "/"
+@using Shiny.DocumentDb
+@using Stridell_Origins.Model
+@using Stridell_Origins.Services
+@using Stridell_Origins.Services.DataLayer
+@using Stridell_Origins.Services.IndexedDb
+@inject Istore _store
+@inject IbrowserStore _browserStorage
+@inject NetworkConnectivity _networkService
+@inject IJSRuntime _js
+
+<PageTitle>Home</PageTitle>
+
+<main class="container">
+    <div id="alert-container"></div>
+
+    <h1>Our Game Collection</h1>
+    <p>Browse through our extensive collection of computer and console games.</p>
+
+    <button @onclick="BrowserStorageAsync" type="button" class="btn btn-outline-secondary my-4">Snyc Storage</button>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <h3>Filter by Genre</h3>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="filterByGenre('')">All Games</a></li>
+                <?php foreach ($all_genres as $genre): ?>
+                <li><a href="javascript:void(0)" onclick="filterByGenre('<?php echo htmlspecialchars($genre); ?>')"><?php echo htmlspecialchars($genre); ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+
+        </aside>
+
+        <section class="main-content">
+            <h2>Available Games (<span id="game-count"><?php echo count($all_games); ?></span>)</h2>
+
+            <div id="products-container" class="products-grid">
+                @if(cloudGames.Count > 0)
+                {
+                    foreach(var game in cloudGames)
+                    {
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="/images/games/@(game.GameId).png"
+                                     alt="YeaH MAn"
+                                     style="width:100%; height:100%; object-fit:cover;"
+                                >
+                            </div>
+
+                            <div class="product-info">
+                                <div class="product-name">@game.GameName</div>
+                                <div class="product-developer">@game.Developer</div>
+                                <span class="product-genre">@game.Genre</span>
+                                <div class="product-price">£@game.Price</div>
+                                <div class="product-rating">⭐ @(game.Rating)/10</div>
+                                <p style="font-size: 0.9rem; color: #7f8c8d; margin: 0.5rem 0;">
+                                    <?php echo substr(htmlspecialchars($game['description']), 0, 100); ?>...
+                                </p>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary add-to-cart-btn" data-game-id="<?php echo $game['game_id']; ?>" data-game-name="<?php echo htmlspecialchars($game['game_name']); ?>">Add to Cart</button>
+                                    <button class="btn btn-secondary" onclick="viewGameDetails(<?php echo $game['game_id']; ?>)">Details</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+                else
+                {
+                <p>No games available at the moment.</p>
+
+                }
+            </div>
+        </section>
+    </div>
+</main>
+
+@code{
+
+    private List<GamesDto> cloudGames { get; set; } = new();
+
+    private bool _isOnline { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // var result = await _store.GetGamesAsync();
+
+        // if(result != null)
+        // {
+        //     cloudGames = result;
+        // }
+        _isOnline = await _networkService.IsOnlineAsync();
+
+        if (_isOnline)
+        {
+           
+            try
+            {
+                var result = await _store.GetGamesAsync();
+
+                if (result != null)
+                {
+                    cloudGames = result;
+                }
+            }
+            catch (Exception)
+            {
+                
+            }
+        }
+        else
+        {
+            var browserGames = await _browserStorage.GetGamesAsync();
+
+            cloudGames = browserGames.Select(game => new GamesDto
+            {
+                GameId = game.Id,
+                GameName = game.GameName,
+                Developer = game.Developer,
+                Genre = game.Genre,
+                Price = game.Price,
+                Rating = game.Rating,
+                Description = game.Description,
+            }).ToList();
+
+        }
+
+    }
+
+
+    private async Task BrowserStorageAsync()
+    {
+        await _browserStorage.AddGamesAsync(cloudGames);
+    }
+
+
+}
