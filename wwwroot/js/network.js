@@ -1,15 +1,5 @@
 ﻿
 
-//window.network = {
-//    isOnline: function () {
-//        try {
-//            await fetch('https://www.google.com/generate_204', { method: 'HEAD', mode: 'no-cors', signal });
-//            return true;
-//        } catch (e) {
-
-//        }
-//    }
-//};
 
 window.network = {
     checkConnectivity: async function (timeoutMs = 5000) {
