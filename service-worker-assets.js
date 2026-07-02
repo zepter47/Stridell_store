@@ -145,8 +145,8 @@
       "url": "_framework\/Shiny.DocumentDb.hn4qw3rmg4.wasm.br"
     },
     {
-      "hash": "sha256-rO8GYQrWU3+cKKmXu62Gk0X2mrmrJb2+4vshsABR84w=",
-      "url": "_framework\/Stridell_Origins.7otdir6upu.wasm.br"
+      "hash": "sha256-9GOzwDBMcycYRWaD5OMiXLFGkPeLy6kyUEZwOO6wp6E=",
+      "url": "_framework\/Stridell_Origins.mit5d4bgkn.wasm.br"
     },
     {
       "hash": "sha256-2I7koF2f7KTfYbv6mRwLaxT5yqWSp6pXF9m2XZU9rkQ=",
@@ -425,8 +425,8 @@
       "url": "_framework\/dotnet.runtime.q5rqv3xrhm.js"
     },
     {
-      "hash": "sha256-ZP+qi0YeJ\/WYSzHUoVNdBQF5QyAY5IilAXB1WP7UYzw=",
-      "url": "_framework\/dotnet.skf33zw54x.js"
+      "hash": "sha256-MXtx\/bZOSWlQKKrKnjCRk4NPk4rVTaR15\/zOvCW0nno=",
+      "url": "_framework\/dotnet.xgtweo3js7.js"
     },
     {
       "hash": "sha256-qPzRJ7vpZXzgfn\/zRN4sE1DCkIMOhv0uhpIe\/6UMYj4=",
@@ -497,7 +497,7 @@
       "url": "images\/games\/9.png"
     },
     {
-      "hash": "sha256-7sWTuCnOJgS6OOHEZLZGj6HeP5iAfdRSLN4XG6Wiwao=",
+      "hash": "sha256-ESTTKeQw9hBuKSVRmYSvPN2+n7wxskv0\/A\/ciAruO1E=",
       "url": "index.html"
     },
     {
@@ -701,5 +701,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "K6t8Jxfa"
+  "version": "v4\/iZsY9"
 };
