@@ -7,7 +7,7 @@
     <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 	<GHPages>true</GHPages>
-	<GHPagesBase>"/"</GHPagesBase>
+	<GHPagesBase>/</GHPagesBase>
   </PropertyGroup>
 
   <ItemGroup>
