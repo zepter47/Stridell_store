@@ -83,17 +83,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // var result = await _store.GetGamesAsync();
-
-        // if(result != null)
-        // {
-        //     cloudGames = result;
-        // }
         _isOnline = await _networkService.IsOnlineAsync();
 
         if (_isOnline)
         {
-           
+
             try
             {
                 var result = await _store.GetGamesAsync();
@@ -105,24 +99,14 @@
             }
             catch (Exception)
             {
-                
+
             }
         }
         else
         {
             var browserGames = await _browserStorage.GetGamesAsync();
 
-            cloudGames = browserGames.Select(game => new GamesDto
-            {
-                GameId = game.Id,
-                GameName = game.GameName,
-                Developer = game.Developer,
-                Genre = game.Genre,
-                Price = game.Price,
-                Rating = game.Rating,
-                Description = game.Description,
-            }).ToList();
-
+            cloudGames = browserGames;
         }
 
     }
@@ -131,6 +115,7 @@
     private async Task BrowserStorageAsync()
     {
         await _browserStorage.AddGamesAsync(cloudGames);
+
     }
 
 

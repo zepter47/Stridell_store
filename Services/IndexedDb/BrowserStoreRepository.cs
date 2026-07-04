@@ -20,9 +20,15 @@ namespace Stridell_Origins.Services.IndexedDb
             await _store.BatchInsert(document);
         }
 
-        public async Task<List<GamesObject>> GetGamesAsync()
+        public async Task<List<GamesDto>> GetGamesAsync()
         {
-           var games = (await _store.Query<GamesObject>().ToList()).ToList();
+           var games = (await _store.Query<GamesObject>().Select(x => 
+           new GamesDto
+           {
+               GameId = x.Id, GameName = x.GameName, Developer = x.Developer,
+               Genre = x.Genre, Price = x.Price, Rating = x.Rating,
+               Description = x.Description
+           }).ToList()).ToList();
 
             return games;
         }
