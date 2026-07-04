@@ -6,7 +6,7 @@ namespace Stridell_Origins.Services.IndexedDb
     {
         Task AddGamesAsync(List<GamesDto> games);
 
-        Task<List<GamesObject>> GetGamesAsync();
+        Task<List<GamesDto>> GetGamesAsync();
 
     }
 }
