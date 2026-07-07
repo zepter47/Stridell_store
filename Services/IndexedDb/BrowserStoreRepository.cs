@@ -32,5 +32,23 @@ namespace Stridell_Origins.Services.IndexedDb
 
             return games;
         }
+
+        public async Task<List<GamesDto>> SearchGamesAsync(string SearchText)
+        {
+            var gamer = (await _store.Query<GamesObject>().Where(game => game.GameName.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+            .Select(x =>
+           new GamesDto
+           {
+               GameId = x.Id,
+               GameName = x.GameName,
+               Developer = x.Developer,
+               Genre = x.Genre,
+               Price = x.Price,
+               Rating = x.Rating,
+               Description = x.Description
+           }).ToList()).ToList();
+
+            return gamer;
+        }
     }
 }

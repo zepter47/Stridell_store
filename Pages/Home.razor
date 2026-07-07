@@ -76,37 +76,30 @@
 </main>
 
 @code{
+    [SupplyParameterFromQuery(Name = "q")]
+    public string? SearchTerm { get; set; }
 
     private List<GamesDto> cloudGames { get; set; } = new();
 
     private bool _isOnline { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         _isOnline = await _networkService.IsOnlineAsync();
 
         if (_isOnline)
         {
-
-            try
-            {
-                var result = await _store.GetGamesAsync();
-
-                if (result != null)
-                {
-                    cloudGames = result;
-                }
-            }
-            catch (Exception)
-            {
-
-            }
+            cloudGames = string.IsNullOrWhiteSpace(SearchTerm)
+            ? await _store.GetGamesAsync()
+            : await _store.SearchGamesAsync(SearchTerm);
         }
         else
         {
             var browserGames = await _browserStorage.GetGamesAsync();
 
-            cloudGames = browserGames;
+            cloudGames = string.IsNullOrWhiteSpace(SearchTerm) 
+            ? browserGames 
+            : await _browserStorage.SearchGamesAsync(SearchTerm);
         }
 
     }
