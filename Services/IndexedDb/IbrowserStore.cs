@@ -8,5 +8,7 @@ namespace Stridell_Origins.Services.IndexedDb
 
         Task<List<GamesDto>> GetGamesAsync();
 
+        Task<List<GamesDto>> SearchGamesAsync(string SearchText);
+
     }
 }
