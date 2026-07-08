@@ -20,29 +20,23 @@
     <button @onclick="BrowserStorageAsync" type="button" class="btn btn-outline-secondary my-4">Snyc Storage</button>
 
     <div class="main-wrapper">
-        <aside class="sidebar">
+        <aside class="sidebar" aria-label="Game filters">
             <h3>Filter by Genre</h3>
-            <ul>
-                <li><a href="javascript:void(0)" onclick="filterByGenre('')">All Games</a></li>
-                <?php foreach ($all_genres as $genre): ?>
-                <li><a href="javascript:void(0)" onclick="filterByGenre('<?php echo htmlspecialchars($genre); ?>')"><?php echo htmlspecialchars($genre); ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-
+            @GenreOptions()
         </aside>
 
         <section class="main-content">
-            <h2>Available Games (<span id="game-count"><?php echo count($all_games); ?></span>)</h2>
+            <h2>Available Games (<span id="game-count">@FilteredGames.Count</span>)</h2>
 
             <div id="products-container" class="products-grid">
-                @if(cloudGames.Count > 0)
+                @if (FilteredGames.Count > 0)
                 {
-                    foreach(var game in cloudGames)
+                    foreach (var game in FilteredGames)
                     {
                         <div class="product-card">
                             <div class="product-image">
                                 <img src="/images/games/@(game.GameId).png"
-                                     alt="YeaH MAn"
+                                     alt="Cover art for @game.GameName"
                                      style="width:100%; height:100%; object-fit:cover;"
                                 >
                             </div>
@@ -54,12 +48,12 @@
                                 <div class="product-price">£@game.Price</div>
                                 <div class="product-rating">⭐ @(game.Rating)/10</div>
                                 <p style="font-size: 0.9rem; color: #7f8c8d; margin: 0.5rem 0;">
-                                    <?php echo substr(htmlspecialchars($game['description']), 0, 100); ?>...
+                                    @ShortDescription(game.Description)
                                 </p>
-                                <div class="product-actions">
-                                    <button class="btn btn-primary add-to-cart-btn" data-game-id="<?php echo $game['game_id']; ?>" data-game-name="<?php echo htmlspecialchars($game['game_name']); ?>">Add to Cart</button>
-                                    <button class="btn btn-secondary" onclick="viewGameDetails(<?php echo $game['game_id']; ?>)">Details</button>
-                                </div>
+                               @*<div class="product-actions">
+                                    <button type="button" class="btn btn-primary add-to-cart-btn" data-game-id="@game.GameId" data-game-name="@game.GameName">Add to Cart</button>
+                                    <button type="button" class="btn btn-secondary" data-game-id="@game.GameId">Details</button>
+                                </div>*@                            
                             </div>
                         </div>
 
@@ -67,12 +61,35 @@
                 }
                 else
                 {
-                <p>No games available at the moment.</p>
+                    <p class="no-games">No games match the selected genre.</p>
 
                 }
             </div>
         </section>
     </div>
+
+    @if (_isFilterPanelOpen)
+    {
+        <button class="filter-backdrop" aria-label="Close genre filters" @onclick="CloseFilterPanel"></button>
+        <section class="mobile-filter-panel" role="dialog" aria-modal="true" aria-labelledby="mobile-filter-title">
+            <div class="mobile-filter-header">
+                <h3 id="mobile-filter-title">Filter by Genre</h3>
+                <button class="filter-close" type="button" aria-label="Close genre filters" @onclick="CloseFilterPanel">&times;</button>
+            </div>
+            @GenreOptions(true)
+        </section>
+    }
+
+    <button class="mobile-filter-button"
+            type="button"
+            aria-label="Filter games by genre"
+            aria-expanded="@_isFilterPanelOpen"
+            @onclick="ToggleFilterPanel">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M4 5h16M7 12h10M10 19h4" />
+        </svg>
+        <span>@(_selectedGenre is null ? "Filter" : _selectedGenre)</span>
+    </button>
 </main>
 
 @code{
@@ -82,6 +99,22 @@
     private List<GamesDto> cloudGames { get; set; } = new();
 
     private bool _isOnline { get; set; }
+    private bool _isFilterPanelOpen;
+    private string? _selectedGenre;
+
+    private IReadOnlyList<string> Genres => cloudGames
+        .Select(game => game.Genre?.Trim())
+        .Where(genre => !string.IsNullOrWhiteSpace(genre))
+        .Select(genre => genre!)
+        .Distinct(StringComparer.OrdinalIgnoreCase)
+        .OrderBy(genre => genre, StringComparer.OrdinalIgnoreCase)
+        .ToList();
+
+    private IReadOnlyList<GamesDto> FilteredGames => string.IsNullOrWhiteSpace(_selectedGenre)
+        ? cloudGames
+        : cloudGames
+            .Where(game => string.Equals(game.Genre?.Trim(), _selectedGenre, StringComparison.OrdinalIgnoreCase))
+            .ToList();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -99,9 +132,61 @@
 
             cloudGames = string.IsNullOrWhiteSpace(SearchTerm) 
             ? browserGames 
-            : await _browserStorage.SearchGamesAsync(SearchTerm);
+                : await _browserStorage.SearchGamesAsync(SearchTerm);
         }
 
+        if (_selectedGenre is not null && !Genres.Contains(_selectedGenre, StringComparer.OrdinalIgnoreCase))
+        {
+            _selectedGenre = null;
+        }
+
+    }
+
+    private RenderFragment GenreOptions(bool closeAfterSelection = false) => @<ul class="genre-list">
+        <li>
+            <button type="button"
+                    class="genre-option @(_selectedGenre is null ? "active" : null)"
+                    aria-pressed="@(_selectedGenre is null)"
+                    @onclick="() => SelectGenre(null, closeAfterSelection)">
+                <span>All Games</span>
+                <span class="genre-count">@cloudGames.Count</span>
+            </button>
+        </li>
+        @foreach (var genre in Genres)
+        {
+            <li @key="genre">
+                <button type="button"
+                        class="genre-option @(string.Equals(_selectedGenre, genre, StringComparison.OrdinalIgnoreCase) ? "active" : null)"
+                        aria-pressed="@(string.Equals(_selectedGenre, genre, StringComparison.OrdinalIgnoreCase))"
+                        @onclick="() => SelectGenre(genre, closeAfterSelection)">
+                    <span>@genre</span>
+                    <span class="genre-count">@cloudGames.Count(game => string.Equals(game.Genre?.Trim(), genre, StringComparison.OrdinalIgnoreCase))</span>
+                </button>
+            </li>
+        }
+    </ul>;
+
+    private void SelectGenre(string? genre, bool closeAfterSelection)
+    {
+        _selectedGenre = genre;
+        if (closeAfterSelection)
+        {
+            _isFilterPanelOpen = false;
+        }
+    }
+
+    private void ToggleFilterPanel() => _isFilterPanelOpen = !_isFilterPanelOpen;
+
+    private void CloseFilterPanel() => _isFilterPanelOpen = false;
+
+    private static string ShortDescription(string? description)
+    {
+        if (string.IsNullOrWhiteSpace(description))
+        {
+            return "No description available.";
+        }
+
+        return description.Length <= 100 ? description : $"{description[..100]}...";
     }
 
 

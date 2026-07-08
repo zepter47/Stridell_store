@@ -3,9 +3,9 @@
 <!--LoginDisplay /-->
 
 <nav class="navbar fixed-top bg-dark border-bottom border-body" data-bs-theme="dark">
-    <div class="container-fluid">
+    <div class="container-fluid navbar-content">
         <a class="navbar-brand">🕹️ Stridell</a>
-        <form class="d-flex" role="search" @onsubmit:preventDefault="true" @onsubmit="SubmitSearch">
+        <form class="d-flex navbar-search" role="search" @onsubmit:preventDefault="true" @onsubmit="SubmitSearch">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" @bind="SearchText"/>
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>

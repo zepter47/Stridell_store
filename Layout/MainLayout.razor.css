@@ -3,3 +3,51 @@
     display: flex;
     flex-direction: column;
 }
+
+.navbar-content {
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+}
+
+.navbar-brand {
+    flex: 0 0 auto;
+    margin-right: 0;
+    white-space: nowrap;
+}
+
+.navbar-search {
+    flex: 1 1 24rem;
+    min-width: 0;
+    max-width: 30rem;
+    margin-left: auto;
+}
+
+.navbar-search .form-control {
+    min-width: 0;
+}
+
+.navbar-search .btn {
+    flex: 0 0 auto;
+}
+
+@media (max-width: 380px) {
+    .navbar-content {
+        gap: 0.5rem;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .navbar-search .form-control {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+    .navbar-search .btn {
+        padding-right: 0.65rem;
+        padding-left: 0.65rem;
+    }
+}
