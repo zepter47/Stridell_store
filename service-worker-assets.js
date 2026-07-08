@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-xCaM\/WroSvZyzpLfrFG6EoLXSfRyxkl2GojM8\/XQUC4=",
+      "hash": "sha256-zTrN7bjBWE4hSBOgTkbZCEo74zqoTJd2n4AD94vopv4=",
       "url": "Stridell_Origins.styles.css"
     },
     {
@@ -145,8 +145,8 @@
       "url": "_framework\/Shiny.DocumentDb.hn4qw3rmg4.wasm.br"
     },
     {
-      "hash": "sha256-fOMY\/9LjJ8DZmgCUdn39ZW+Q31eY2ZGbxHYCikiwtu0=",
-      "url": "_framework\/Stridell_Origins.igcp0o257w.wasm.br"
+      "hash": "sha256-EeCtIHqV2Tzz9pb3lABPN+KuVLwYp5sTe0VMYf+FA6U=",
+      "url": "_framework\/Stridell_Origins.swv3bmuadd.wasm.br"
     },
     {
       "hash": "sha256-2I7koF2f7KTfYbv6mRwLaxT5yqWSp6pXF9m2XZU9rkQ=",
@@ -413,6 +413,10 @@
       "url": "_framework\/blazor.webassembly.66stpp682q.js"
     },
     {
+      "hash": "sha256-harsomcTTmXL0H4oNLHc65KlV3DN3q6PyJ0mEEBeQkU=",
+      "url": "_framework\/dotnet.b8t6opqrt2.js"
+    },
+    {
       "hash": "sha256-GXzPWKP5WGp7t6owfnmPXwe7D+ulbC3qpTjlklL+fWM=",
       "url": "_framework\/dotnet.native.llh8ttebyv.js"
     },
@@ -423,10 +427,6 @@
     {
       "hash": "sha256-ArknccFM1sHNVcih0x1h52AG+abNCoQjl6BlVrv3ePw=",
       "url": "_framework\/dotnet.runtime.q5rqv3xrhm.js"
-    },
-    {
-      "hash": "sha256-9rh6oGOhkMiy0vPlJn0XTD50vuK0qa9KfA3+UOH7SFs=",
-      "url": "_framework\/dotnet.yyywqx1tsj.js"
     },
     {
       "hash": "sha256-qPzRJ7vpZXzgfn\/zRN4sE1DCkIMOhv0uhpIe\/6UMYj4=",
@@ -453,7 +453,7 @@
       "url": "appsettings.json"
     },
     {
-      "hash": "sha256-B29pkYgjHPnSGzbvOt6e\/rGA1pNBUEkTQJmKBjmWZAE=",
+      "hash": "sha256-sYPYRNmjO8mCaf\/SCXlx1\/yiVSVdrd+5hvaQxHcUCcQ=",
       "url": "css\/app.css"
     },
     {
@@ -497,7 +497,7 @@
       "url": "images\/games\/9.png"
     },
     {
-      "hash": "sha256-GmudyiRtkZdPESTcu0IOHQmUbVs98xim6kz3zD27hQg=",
+      "hash": "sha256-PABBOeDVCFtzEJpIHhLrg5qYsn+nVuKP\/YUjCJ0cfQU=",
       "url": "index.html"
     },
     {
@@ -701,5 +701,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "UjkohlnH"
+  "version": "ZfZY7W7l"
 };
