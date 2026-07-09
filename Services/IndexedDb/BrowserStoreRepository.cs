@@ -48,6 +48,22 @@ namespace Stridell_Origins.Services.IndexedDb
                Description = x.Description
            }).ToList()).ToList();
 
+            //var results = await _store.FullTextSearch<GamesObject>(SearchText, maxResults: 50);
+
+            //var gamer = (results
+            //    .Select(result => result.Document)
+            //    .Select(game => new GamesDto
+            //    {
+            //        GameId = game.Id,
+            //        GameName = game.GameName,
+            //        Developer = game.Developer,
+            //        Genre = game.Genre,
+            //        Price = game.Price,
+            //        Rating = game.Rating,
+            //        Description = game.Description,
+            //    })
+            //    .ToList()).ToList();
+
             return gamer;
         }
     }

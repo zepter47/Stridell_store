@@ -27,6 +27,7 @@ builder.Services.AddSingleton(new IndexedDbDocumentStoreOptions
     DatabaseName = "StridellStoreDb",
     Version = 1
 }.MapTypeToStore<GamesObject>()
+//.MapFullTextProperty<GamesObject>(x => x.GameName, FullTextLanguage.English)
 );
 
 builder.Services.AddSingleton<IDocumentStore, IndexedDbDocumentStore>();
