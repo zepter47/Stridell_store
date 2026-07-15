@@ -145,8 +145,8 @@
       "url": "_framework\/Shiny.DocumentDb.hn4qw3rmg4.wasm.br"
     },
     {
-      "hash": "sha256-f\/7oha0\/1cxVoozSbRNolq1jDcKDu\/V3aMqRqxV0jgg=",
-      "url": "_framework\/Stridell_Origins.eijx4v1zhn.wasm.br"
+      "hash": "sha256-zK3W5JLI2P9ZBgDzL4q9jx+gx2JyD1NaITmAkQQz2g8=",
+      "url": "_framework\/Stridell_Origins.5hxh42zdwh.wasm.br"
     },
     {
       "hash": "sha256-2I7koF2f7KTfYbv6mRwLaxT5yqWSp6pXF9m2XZU9rkQ=",
@@ -413,6 +413,10 @@
       "url": "_framework\/blazor.webassembly.66stpp682q.js"
     },
     {
+      "hash": "sha256-3GauTMaxP\/QBopkhLeTMFNiblhEScoNG5JJ4zDG06GQ=",
+      "url": "_framework\/dotnet.46sllwvph6.js"
+    },
+    {
       "hash": "sha256-GXzPWKP5WGp7t6owfnmPXwe7D+ulbC3qpTjlklL+fWM=",
       "url": "_framework\/dotnet.native.llh8ttebyv.js"
     },
@@ -423,10 +427,6 @@
     {
       "hash": "sha256-ArknccFM1sHNVcih0x1h52AG+abNCoQjl6BlVrv3ePw=",
       "url": "_framework\/dotnet.runtime.q5rqv3xrhm.js"
-    },
-    {
-      "hash": "sha256-PwdwlyRFiDgTvUIxL3pP09qHRdFEBZn\/6sIErlW9yUA=",
-      "url": "_framework\/dotnet.vgm2x6ltnk.js"
     },
     {
       "hash": "sha256-qPzRJ7vpZXzgfn\/zRN4sE1DCkIMOhv0uhpIe\/6UMYj4=",
@@ -4497,8 +4497,12 @@
       "url": "images\/games\/999.webp"
     },
     {
-      "hash": "sha256-CsiqignZ5GeFi9CEgV3BSXqSC9A6oZ\/S2RrfPWli6xM=",
+      "hash": "sha256-YAK9nyaDS\/SLtSXqV81HGWwiGV0GaFYxXnVrY3FIC98=",
       "url": "index.html"
+    },
+    {
+      "hash": "sha256-vgu6hxs8fD2YG5\/\/KmOpQw\/bGdIPXhdrl6jSaABWEw4=",
+      "url": "js\/ar-perfume.js"
     },
     {
       "hash": "sha256-kQqc34z5zwm7hERkYClHSgJAwDKGGwi6GjxOoIu2fy8=",
@@ -4681,6 +4685,10 @@
       "url": "lib\/bootstrap\/dist\/js\/bootstrap.min.js.map"
     },
     {
+      "hash": "sha256-OpctLHc\/tK5Zx1ln\/1Ejl5SRifWQk3Sifbsi2K2e5KY=",
+      "url": "lib\/perfume\/perfume.umd.min.js"
+    },
+    {
       "hash": "sha256-ota1kmTjbnkuafKumIiQRJHQS1GYLqHVSxKvOe+J1+k=",
       "url": "manifest.webmanifest"
     },
@@ -4701,5 +4709,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "WPlnkPF7"
+  "version": "dcElCBD4"
 };
