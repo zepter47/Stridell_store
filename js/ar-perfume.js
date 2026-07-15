@@ -9,8 +9,9 @@
 
     const endpoint =
         params.get("perfume_endpoint") ||
+        params.get("amp;perfume_endpoint") ||
         window.AR_PERFUME_ENDPOINT ||
-        "";
+        "https://ar-perfume.stridell.org/";
 
     if (!endpoint) {
         console.warn("Android Runner Perfume endpoint is missing.");
