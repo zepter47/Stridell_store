@@ -11,7 +11,7 @@
         params.get("perfume_endpoint") ||
         params.get("amp;perfume_endpoint") ||
         window.AR_PERFUME_ENDPOINT ||
-        "https://ar-perfume.stridell.org/";
+        "https://ar-perfume.stridell.org / ";
 
     if (!endpoint) {
         console.warn("Android Runner Perfume endpoint is missing.");
@@ -100,7 +100,11 @@
 
     function postPerfumeResults(reason) {
         try {
-            const body = "{'perfumeResults':" + JSON.stringify(perfumeResults) + "}";
+            //const body = "{'perfumeResults':" + JSON.stringify(perfumeResults) + "}";
+
+            const body = JSON.stringify({
+                perfumeResults: perfumeResults
+            });
 
             console.log("Posting Android Runner Perfume results:", reason, perfumeResults);
 
@@ -114,6 +118,7 @@
 
             const req = new XMLHttpRequest();
             req.open("POST", endpoint, true);
+            req.setRequestHeader("Content-Type", "application/json");
             req.send(body);
 
         } catch (error) {
