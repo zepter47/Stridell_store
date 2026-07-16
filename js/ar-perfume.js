@@ -134,19 +134,24 @@
     startPerfume();
 
     // Send results deterministically during Android Runner execution.
-    setTimeout(function () {
-        postPerfumeResults("after-3-seconds");
-    }, 3000);
 
     setTimeout(function () {
-        postPerfumeResults("after-8-seconds");
-    }, 8000);
+        postPerfumeResults("single-final-post");
+    }, 20000);
 
-    window.addEventListener("load", function () {
-        setTimeout(function () {
-            postPerfumeResults("load-plus-delay");
-        }, 7000);
-    });
+    //setTimeout(function () {
+    //    postPerfumeResults("after-3-seconds");
+    //}, 3000);
+
+    //setTimeout(function () {
+    //    postPerfumeResults("after-8-seconds");
+    //}, 8000);
+
+    //window.addEventListener("load", function () {
+    //    setTimeout(function () {
+    //        postPerfumeResults("load-plus-delay");
+    //    }, 7000);
+    //});
 
     document.addEventListener("visibilitychange", function () {
         if (document.visibilityState === "hidden") {
