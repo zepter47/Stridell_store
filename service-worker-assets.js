@@ -4501,7 +4501,7 @@
       "url": "index.html"
     },
     {
-      "hash": "sha256-Ar70\/YcS0ElsQRcjAENrxjGj9Tlp6o5G\/s1gfdoBDfk=",
+      "hash": "sha256-87ec+YVoykb2z8id5VA1e0fKEN9H7NVtKyjMrSKXEcc=",
       "url": "js\/ar-perfume.js"
     },
     {
@@ -4709,5 +4709,5 @@
       "url": "brotliloader.min.js"
     }
   ],
-  "version": "qiWL6fQa"
+  "version": "8dVg2XTJ"
 };

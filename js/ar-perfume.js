@@ -11,7 +11,7 @@
         params.get("perfume_endpoint") ||
         params.get("amp;perfume_endpoint") ||
         window.AR_PERFUME_ENDPOINT ||
-        "https://ar-perfume.stridell.org / ";
+        "https://ar-perfume.stridell.org/";
 
     if (!endpoint) {
         console.warn("Android Runner Perfume endpoint is missing.");
@@ -100,8 +100,6 @@
 
     function postPerfumeResults(reason) {
         try {
-            //const body = "{'perfumeResults':" + JSON.stringify(perfumeResults) + "}";
-
             const body = JSON.stringify({
                 perfumeResults: perfumeResults
             });
@@ -109,7 +107,13 @@
             console.log("Posting Android Runner Perfume results:", reason, perfumeResults);
 
             if (navigator.sendBeacon) {
-                const ok = navigator.sendBeacon(endpoint, body);
+                const blob = new Blob([body], {
+                    type: "text/plain;charset=UTF-8"
+                });
+
+                const ok = navigator.sendBeacon(endpoint, blob);
+
+                console.log("AR Perfume sendBeacon result:", ok);
 
                 if (ok) {
                     return;
@@ -118,7 +122,7 @@
 
             const req = new XMLHttpRequest();
             req.open("POST", endpoint, true);
-            req.setRequestHeader("Content-Type", "application/json");
+            req.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
             req.send(body);
 
         } catch (error) {
@@ -126,7 +130,17 @@
         }
     }
 
+    // Start collecting Perfume.js metrics.
     startPerfume();
+
+    // Send results deterministically during Android Runner execution.
+    setTimeout(function () {
+        postPerfumeResults("after-3-seconds");
+    }, 3000);
+
+    setTimeout(function () {
+        postPerfumeResults("after-8-seconds");
+    }, 8000);
 
     window.addEventListener("load", function () {
         setTimeout(function () {
