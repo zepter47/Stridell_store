@@ -55,39 +55,41 @@
 
     function startPerfume() {
         try {
+
+            const perfumeOptions = {
+                analyticsTracker: analyticsTracker,
+                resourceTiming: false,
+                maxMeasureTime: 30000,
+                reportOptions: {
+                    lcp: {
+                        reportAllChanges: true
+                    },
+                    cls: {
+                        reportAllChanges: true
+                    },
+                    inp: {
+                        reportAllChanges: true
+                    }
+                }
+            }
+
             if (window.perfume && typeof window.perfume.initPerfume === "function") {
-                window.perfume.initPerfume({
-                    analyticsTracker: analyticsTracker,
-                    resourceTiming: false,
-                    maxMeasureTime: 30000
-                });
+                window.perfume.initPerfume(perfumeOptions);
                 return;
             }
 
             if (window.Perfume && typeof window.Perfume.initPerfume === "function") {
-                window.Perfume.initPerfume({
-                    analyticsTracker: analyticsTracker,
-                    resourceTiming: false,
-                    maxMeasureTime: 30000
-                });
+                window.Perfume.initPerfume(perfumeOptions);
                 return;
             }
 
             if (typeof window.initPerfume === "function") {
-                window.initPerfume({
-                    analyticsTracker: analyticsTracker,
-                    resourceTiming: false,
-                    maxMeasureTime: 30000
-                });
+                window.initPerfume(perfumeOptions);
                 return;
             }
 
             if (typeof window.Perfume === "function") {
-                new window.Perfume({
-                    analyticsTracker: analyticsTracker,
-                    resourceTiming: false,
-                    maxMeasureTime: 30000
-                });
+                new window.Perfume(perfumeOptions);
                 return;
             }
 
