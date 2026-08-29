@@ -164,7 +164,8 @@
                 </button>
             </li>
         }
-    </ul>;
+    </ul>
+    ;
 
     private void SelectGenre(string? genre, bool closeAfterSelection)
     {
@@ -192,7 +193,16 @@
 
     private async Task BrowserStorageAsync()
     {
-        await _browserStorage.AddGamesAsync(cloudGames);
+        var browserGames = await _browserStorage.GetGamesAsync();
+
+        if(browserGames.Count <= 0)
+        {
+            await _browserStorage.AddGamesAsync(cloudGames);
+        }
+        else
+        {
+            return;
+        }
 
     }
 
